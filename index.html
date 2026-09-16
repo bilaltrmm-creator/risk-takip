@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-</style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RİSK TAKİP - Kurumsal Portal</title>
@@ -9,126 +8,140 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <!-- FontAwesome (Filtre ikonu için) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Netlify Tarzı Modern Font (Inter) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Apple Tarzı Modern Font (SF Pro / Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
+      --apple-bg: #f5f5f7;
+      --apple-card-bg: #ffffff;
+      --apple-text: #1d1d1f;
+      --apple-gray: #86868b;
+      --apple-border: #d2d2d7;
+      --apple-blue: #0066cc;
       --primary-green: #0a5c36;
       --primary-medium: #1f7a4d;
       --bg-green-light: #f2f9f4;
-      --text-color: #2c3e50;
-      --bg-body: #f7faf8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-body); color: var(--text-color); display: flex; height: 100vh; overflow: hidden; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif; background-color: var(--apple-bg); color: var(--apple-text); display: flex; height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased; }
 
-    /* LOGIN EKRANI STİLLERİ */
+    /* LOGIN EKRANI (Apple Tarzı & İstenen Arka Plan) */
     #loginScreen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: linear-gradient(135deg, rgba(10,92,54,0.92) 0%, rgba(31,122,77,0.92) 100%), url('risktakip.png') no-repeat center center;
+      background: linear-gradient(135deg, rgba(29,29,31,0.75) 0%, rgba(10,92,54,0.85) 100%), url('https://lh3.googleusercontent.com/d/1c8bXeXbYsmMv7N10rhxp9JmUhYJhLSOU') no-repeat center center;
       background-size: cover;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 9999;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
     .login-card {
-      background: #ffffff;
-      padding: 40px 35px;
-      border-radius: 16px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 50px 40px;
+      border-radius: 24px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       text-align: center;
-      border: 1px solid #e2eae5;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
     }
-    .login-logo { max-height: 60px; margin-bottom: 20px; object-fit: contain; }
-    .login-title { font-size: 20px; font-weight: 700; color: var(--primary-green); margin-bottom: 25px; letter-spacing: 0.5px; }
-    .login-form-group { margin-bottom: 18px; text-align: left; }
-    .login-form-group label { display: block; font-size: 13px; font-weight: 600; color: #4a5568; margin-bottom: 6px; }
-    .login-form-group input { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; }
-    .login-form-group input:focus { border-color: var(--primary-green); box-shadow: 0 0 0 3px rgba(10, 92, 54, 0.1); }
-    .login-btn { width: 100%; background-color: var(--primary-green); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
-    .login-btn:hover { background-color: var(--primary-medium); }
-    .login-error { color: #e53e3e; font-size: 13px; margin-top: 12px; font-weight: 600; display: none; }
+    .login-logo { max-height: 50px; margin-bottom: 25px; object-fit: contain; }
+    .login-title { font-size: 22px; font-weight: 600; color: var(--apple-text); margin-bottom: 30px; letter-spacing: -0.01em; }
+    .login-form-group { margin-bottom: 20px; text-align: left; }
+    .login-form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--apple-gray); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .login-form-group input { width: 100%; padding: 14px 16px; border: 1px solid var(--apple-border); border-radius: 12px; font-size: 15px; outline: none; background: #fafafa; transition: all 0.2s ease; }
+    .login-form-group input:focus { border-color: var(--primary-green); background: #ffffff; box-shadow: 0 0 0 4px rgba(10, 92, 54, 0.12); }
+    .login-btn { width: 100%; background-color: var(--apple-text); color: white; border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 15px; transition: background 0.2s, transform 0.1s; }
+    .login-btn:hover { background-color: var(--primary-green); }
+    .login-error { color: #ff3b30; font-size: 13px; margin-top: 15px; font-weight: 500; display: none; }
 
-    /* ANA PORTAL YAPI */
-    #portalContainer { display: none; width: 100vw; height: 100vh; overflow: hidden; }
+    /* ANA PORTAL YAPI (Apple Sidebar & Clean Layout) */
+    #portalContainer { display: none; width: 100vw; height: 100vh; overflow: hidden; background-color: var(--apple-bg); }
 
-    .sidebar { width: 320px; background-color: #ffffff; border-right: 1px solid #e0e6e3; display: flex; flex-direction: column; box-shadow: 2px 0 10px rgba(0,0,0,0.03); z-index: 10; }
-    .sidebar-header { padding: 20px 15px; background-color: #ffffff; border-bottom: 2px solid var(--bg-green-light); display: flex; align-items: center; justify-content: center; min-height: 90px; }
-    .sidebar-header img { max-width: 100%; height: auto; max-height: 70px; object-fit: contain; }
-    .logo-fallback { font-size: 20px; font-weight: 800; color: var(--primary-green); letter-spacing: 1.5px; text-transform: uppercase; }
+    .sidebar { width: 280px; background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-right: 1px solid var(--apple-border); display: flex; flex-direction: column; z-index: 10; }
+    .sidebar-header { padding: 25px 20px; border-bottom: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; min-height: 80px; cursor: pointer; }
+    .sidebar-header img { max-width: 100%; height: auto; max-height: 45px; object-fit: contain; }
+    .logo-fallback { font-size: 17px; font-weight: 700; color: var(--apple-text); letter-spacing: 1px; }
 
-    .nav-list { list-style: none; padding-top: 15px; overflow-y: auto; flex: 1; }
-    .nav-item { padding: 14px 20px; cursor: pointer; border-bottom: 1px solid #f0f4f2; font-weight: 600; color: #4a5568; transition: all 0.2s ease; display: flex; align-items: center; gap: 10px; font-size: 14px; }
-    .nav-item:hover { background-color: var(--bg-green-light); color: var(--primary-green); }
-    .nav-item.active { background-color: var(--primary-green); color: #ffffff; }
+    .nav-list { list-style: none; padding: 15px 12px; overflow-y: auto; flex: 1; }
+    .nav-item { padding: 12px 16px; cursor: pointer; border-radius: 10px; margin-bottom: 4px; font-weight: 500; color: var(--apple-gray); transition: all 0.2s ease; display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .nav-item:hover { background-color: rgba(0,0,0,0.04); color: var(--apple-text); }
+    .nav-item.active { background-color: var(--primary-green); color: #ffffff; font-weight: 600; box-shadow: 0 4px 12px rgba(10,92,54,0.25); }
 
-    .nav-sub-list { list-style: none; background-color: #f9fbf9; border-bottom: 1px solid #eaeaea; display: none; }
-    .nav-sub-item { padding: 12px 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-bottom: 1px dashed #e8e8e8; transition: all 0.2s; }
-    .nav-sub-item:hover { background-color: #eaf4ed; }
+    .nav-sub-list { list-style: none; padding-left: 10px; margin: 4px 0 8px 0; display: none; }
+    .nav-sub-item { padding: 8px 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 4px; transition: all 0.2s; }
+    .nav-sub-item:hover { background-color: rgba(0,0,0,0.04); }
     .nav-sub-item.active { background-color: var(--primary-medium); }
     
-    .menu-logo-wrapper { width: 100%; height: 45px; background: #ffffff; border: 1px solid #e0e0e0; border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: transform 0.2s; }
+    .menu-logo-wrapper { width: 100%; height: 38px; background: #ffffff; border: 1px solid var(--apple-border); border-radius: 8px; display: flex; align-items: center; justify-content: center; padding: 4px; transition: transform 0.2s; }
     .menu-logo-wrapper:hover { transform: scale(1.02); }
     .menu-company-logo { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-    .main-content { flex: 1; padding: 30px; overflow-y: auto; }
-    .tab-content { display: none; background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2eae5; }
-    .tab-content.active { display: block; }
+    .main-content { flex: 1; padding: 40px; overflow-y: auto; background: var(--apple-bg); }
+    .tab-content { display: none; background: var(--apple-card-bg); padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.04); }
+    .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-    .page-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--bg-green-light); padding-bottom: 12px; margin-bottom: 20px; }
-    .page-header h2 { color: var(--primary-green); font-size: 22px; }
-    .header-company-logo { height: 50px; max-width: 180px; object-fit: contain; }
+    .page-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); padding-bottom: 16px; margin-bottom: 25px; }
+    .page-header h2 { color: var(--apple-text); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+    .header-company-logo { height: 40px; max-width: 160px; object-fit: contain; }
 
-    /* CANLI PİYASA WIDGET ALANI */
-    .market-widget-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 15px; }
-    .market-card { background: #ffffff; border: 1px solid #e2eae5; border-radius: 10px; padding: 14px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, background-color 0.3s; }
-    .market-card:hover { transform: translateY(-2px); border-color: var(--primary-medium); }
-    .market-title { font-size: 12px; font-weight: 700; color: #718096; text-transform: uppercase; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-    .market-value { font-size: 17px; font-weight: 800; color: #2d3748; }
-    .market-rate { font-size: 12px; font-weight: 700; margin-top: 4px; display: inline-flex; align-items: center; gap: 3px; }
-    .rate-up { color: #2e7d32; }
-    .rate-down { color: #c0392b; }
+    /* ANASAYFA KURUMSAL BANNER FOTOĞRAFI (Soluk Arka Plan Entegrasyonu) */
+    .portal-banner-box { width: 100%; max-height: 300px; overflow: hidden; border-radius: 16px; margin-bottom: 25px; border: 1px solid var(--apple-border); box-shadow: 0 8px 24px rgba(0,0,0,0.06); position: relative; }
+    .portal-banner-box::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)); pointer-events: none; }
+    .portal-banner-img { width: 100%; height: auto; max-height: 300px; object-fit: cover; display: block; filter: brightness(0.9); }
+
+    /* CANLI PİYASA WIDGET ALANI (Apple Kart Tasarımı) */
+    .market-widget-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 25px; }
+    .market-card { background: #ffffff; border: 1px solid var(--apple-border); border-radius: 16px; padding: 18px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .market-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); border-color: var(--primary-green); }
+    .market-title { font-size: 11px; font-weight: 600; color: var(--apple-gray); text-transform: uppercase; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.05em; }
+    .market-value { font-size: 18px; font-weight: 700; color: var(--apple-text); letter-spacing: -0.01em; }
+    .market-rate { font-size: 12px; font-weight: 600; margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; }
+    .rate-up { color: #34c759; }
+    .rate-down { color: #ff3b30; }
     .pulse-flash { animation: flashEffect 0.8s ease; }
     @keyframes flashEffect {
-      0% { background-color: #d4efdf; }
+      0% { background-color: #e8f5e9; }
       100% { background-color: #ffffff; }
     }
 
-    /* BIST HİSSELERİ KAYAN YAZI (MARQUEE) STİLİ */
-    .bist-ticker-box { background: var(--primary-green); color: white; padding: 10px 15px; border-radius: 8px; margin-bottom: 25px; display: flex; align-items: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-    .bist-label { background: #074226; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-right: 15px; white-space: nowrap; letter-spacing: 0.5px; flex-shrink: 0; z-index: 2; }
+    /* BIST HİSSELERİ KAYAN YAZI (MARQUEE) */
+    .bist-ticker-box { background: var(--apple-text); color: white; padding: 12px 18px; border-radius: 14px; margin-bottom: 25px; display: flex; align-items: center; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+    .bist-label { background: #333336; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 600; text-transform: uppercase; margin-right: 15px; white-space: nowrap; letter-spacing: 0.05em; flex-shrink: 0; z-index: 2; }
     .bist-marquee-wrapper { overflow: hidden; width: 100%; white-space: nowrap; position: relative; display: flex; }
-    .bist-marquee-content { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; font-size: 14px; font-weight: 600; padding-left: 100%; }
+    .bist-marquee-content { display: inline-block; white-space: nowrap; animation: marquee 35s linear infinite; font-size: 13.5px; font-weight: 500; padding-left: 100%; }
     .bist-marquee-content:hover { animation-play-state: paused; }
     @keyframes marquee {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
     .stock-item { margin-right: 25px; display: inline-flex; align-items: center; gap: 6px; }
-    .stock-up { color: #a3e4d7; }
-    .stock-down { color: #f5b7b1; }
+    .stock-up { color: #34c759; }
+    .stock-down { color: #ff3b30; }
 
-    /* YÖNETİM ŞEMASI WIDGET STİLİ */
-    .org-chart-section { margin-top: 30px; background: #ffffff; border: 1px solid #e2eae5; border-radius: 10px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); text-align: center; }
-    .org-chart-section h3 { font-size: 16px; color: var(--primary-green); margin-bottom: 15px; border-bottom: 2px solid var(--bg-green-light); padding-bottom: 8px; text-align: left; display: flex; align-items: center; gap: 8px; }
-    .org-chart-img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #e2eae5; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    /* YÖNETİM ŞEMASI GÖRSEL ALANI */
+    .org-chart-full-box { text-align: center; padding: 10px; background: #fff; border-radius: 12px; }
+    .org-chart-full-img { max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--apple-border); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
 
-    table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; border-radius: 8px; overflow: hidden; }
-    th { background-color: var(--primary-green); color: white; text-align: left; padding: 12px 16px; font-weight: 600; font-size: 14px; position: relative; }
-    td { padding: 12px 16px; border-bottom: 1px solid #edf2ef; font-size: 14px; text-align: left; }
-    tr:hover { background-color: #f8faf8; }
+    /* TABLOLAR (Apple Tarzı Temiz Çizgiler) */
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; background: white; border-radius: 14px; overflow: hidden; border: 1px solid var(--apple-border); }
+    th { background-color: #fafafc; color: var(--apple-gray); text-align: left; padding: 14px 18px; font-weight: 600; font-size: 12.5px; border-bottom: 1px solid var(--apple-border); text-transform: uppercase; letter-spacing: 0.03em; position: relative; }
+    td { padding: 14px 18px; border-bottom: 1px solid #f2f2f7; font-size: 13.5px; text-align: left; color: var(--apple-text); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover { background-color: #fbfbfd; }
 
-    /* LİMİT İZLEME TABLO SÜTUN FİLTRE MENÜSÜ (POPOVER) */
-    .filter-icon { cursor: pointer; color: #a3e4d7; transition: color 0.2s; font-size: 12px; }
-    .filter-icon:hover { color: #ffffff; }
+    /* LİMİT İZLEME TABLO SÜTUN FİLTRE MENÜSÜ */
+    .filter-icon { cursor: pointer; color: var(--apple-gray); transition: color 0.2s; font-size: 12px; }
+    .filter-icon:hover { color: var(--apple-text); }
     .filter-dropdown-menu {
       position: absolute;
       top: 100%;
@@ -137,54 +150,56 @@
       display: none;
       width: 250px;
       background: #ffffff;
-      color: #333333;
-      border: 1px solid #cbd5e0;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      padding: 12px;
-      border-radius: 8px;
+      color: var(--apple-text);
+      border: 1px solid var(--apple-border);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      padding: 14px;
+      border-radius: 14px;
       text-align: left;
       font-weight: normal;
     }
     .filter-dropdown-menu.show { display: block; }
     .filter-search-box { position: relative; margin-bottom: 10px; }
-    .filter-search-box input { width: 100%; padding: 6px 8px 6px 28px; font-size: 12px; border: 1px solid #cbd5e0; border-radius: 4px; outline: none; }
-    .filter-search-box i { position: absolute; left: 8px; top: 8px; color: #a0aec0; font-size: 11px; }
-    .filter-list { max-height: 150px; overflow-y: auto; list-style: none; padding-left: 0; margin-bottom: 10px; font-size: 12.5px; border-top: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7; }
-    .filter-list li { padding: 5px 4px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .filter-list li:hover { background-color: #f7faf8; }
-    .filter-footer { display: flex; justify-content: space-between; gap: 6px; }
-    .filter-footer button { flex: 1; font-size: 11.5px; padding: 5px; border: 1px solid #cbd5e0; background: #f8fafc; border-radius: 4px; cursor: pointer; font-weight: 600; }
-    .filter-footer button:hover { background: #edf2f7; }
+    .filter-search-box input { width: 100%; padding: 8px 10px 8px 30px; font-size: 12.5px; border: 1px solid var(--apple-border); border-radius: 8px; outline: none; background: #fafafc; }
+    .filter-search-box i { position: absolute; left: 10px; top: 10px; color: var(--apple-gray); font-size: 11px; }
+    .filter-list { max-height: 150px; overflow-y: auto; list-style: none; padding-left: 0; margin-bottom: 10px; font-size: 13px; border-top: 1px solid #f2f2f7; border-bottom: 1px solid #f2f2f7; }
+    .filter-list li { padding: 6px 4px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    .filter-list li:hover { background-color: #f5f5f7; }
+    .filter-footer { display: flex; justify-content: space-between; gap: 8px; }
+    .filter-footer button { flex: 1; font-size: 12px; padding: 6px; border: 1px solid var(--apple-border); background: #f5f5f7; border-radius: 8px; cursor: pointer; font-weight: 500; color: var(--apple-text); transition: background 0.2s; }
+    .filter-footer button:hover { background: #e8e8ed; }
 
-    .action-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s; }
-    .btn-view { background-color: var(--primary-medium); color: white; }
+    .action-btn { padding: 8px 16px; border: none; border-radius: 10px; cursor: pointer; font-weight: 500; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .btn-view { background-color: var(--apple-text); color: white; }
     .btn-view:hover { background-color: var(--primary-green); }
 
-    .limit-controls { display: flex; gap: 12px; margin-bottom: 15px; flex-wrap: wrap; align-items: center; background: var(--bg-green-light); padding: 15px; border-radius: 8px; }
-    .limit-controls input[type="text"] { padding: 10px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width: 260px; outline: none; }
-    .limit-controls input[type="text"]:focus { border-color: var(--primary-green); }
+    .limit-controls { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; background: #fafafc; padding: 18px; border-radius: 14px; border: 1px solid var(--apple-border); }
+    .limit-controls input[type="text"] { padding: 10px 14px; border: 1px solid var(--apple-border); border-radius: 10px; font-size: 13.5px; width: 260px; outline: none; background: #fff; }
+    .limit-controls input[type="text"]:focus { border-color: var(--primary-green); box-shadow: 0 0 0 3px rgba(10,92,54,0.1); }
     
-    .file-upload-box { display: flex; align-items: center; gap: 8px; background: #ffffff; padding: 6px 12px; border: 2px dashed var(--primary-green); border-radius: 6px; cursor: pointer; }
+    .file-upload-box { display: flex; align-items: center; gap: 8px; background: #ffffff; padding: 6px 14px; border: 1px solid var(--apple-border); border-radius: 10px; cursor: pointer; transition: border-color 0.2s; }
+    .file-upload-box:hover { border-color: var(--primary-green); }
     .file-upload-box input[type="file"] { display: none; }
-    .file-upload-label { font-size: 13px; font-weight: 600; color: var(--primary-green); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .file-upload-label { font-size: 13px; font-weight: 500; color: var(--primary-green); cursor: pointer; display: flex; align-items: center; gap: 6px; }
 
-    .btn-filter { background-color: var(--primary-green); color: white; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-filter { background-color: var(--primary-green); color: white; border: none; padding: 10px 16px; border-radius: 10px; font-weight: 500; cursor: pointer; transition: opacity 0.2s; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
     .btn-filter:hover { opacity: 0.9; }
     
-    .btn-red { background-color: #c0392b; color: white; }
-    .btn-yellow { background-color: #d4ac0d; color: #2c3e50; font-weight: 700; }
-    .btn-green { background-color: #0a5c36; color: white; }
+    .btn-red { background-color: #ff3b30; color: white; }
+    .btn-yellow { background-color: #ffcc00; color: #1d1d1f; font-weight: 600; }
+    .btn-green { background-color: var(--primary-green); color: white; }
 
-    .datalist-results { max-height: 220px; overflow-y: auto; background: white; border: 1px solid #ccc; border-radius: 6px; position: absolute; width: 260px; z-index: 100; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-    .datalist-item { padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
-    .datalist-item:hover { background-color: #f1f8f5; color: var(--primary-green); font-weight: 600; }
+    .datalist-results { max-height: 220px; overflow-y: auto; background: white; border: 1px solid var(--apple-border); border-radius: 10px; position: absolute; width: 260px; z-index: 100; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .datalist-item { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #f2f2f7; font-size: 13px; }
+    .datalist-item:hover { background-color: #f5f5f7; color: var(--primary-green); font-weight: 500; }
 
-    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(3px); }
-    .modal-content { background-color: #fff; margin: 2% auto; padding: 20px; border-radius: 10px; width: 85%; height: 90%; display: flex; flex-direction: column; }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 2px solid #eee; }
-    .close-btn { font-size: 24px; cursor: pointer; font-weight: bold; color: #666; }
-    .close-btn:hover { color: #000; }
-    .modal-body { flex: 1; margin-top: 15px; overflow: hidden; background: #f9f9f9; border-radius: 6px; position: relative; }
+    /* MODAL (Apple Tarzı Cam Efekti) */
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); backdrop-filter: blur(10px); }
+    .modal-content { background-color: #fff; margin: 3% auto; padding: 24px; border-radius: 20px; width: 85%; height: 88%; display: flex; flex-direction: column; box-shadow: 0 25px 50px rgba(0,0,0,0.15); border: 1px solid var(--apple-border); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid var(--apple-border); }
+    .close-btn { font-size: 22px; cursor: pointer; font-weight: 400; color: var(--apple-gray); transition: color 0.2s; }
+    .close-btn:hover { color: var(--apple-text); }
+    .modal-body { flex: 1; margin-top: 15px; overflow: hidden; background: #fafafc; border-radius: 12px; position: relative; }
     .modal-body iframe { width: 100%; height: 100%; border: none; }
   </style>
 </head>
@@ -194,7 +209,7 @@
   <div id="loginScreen">
     <div class="login-card">
       <img src="risktakip.png" class="login-logo" alt="RİSK TAKİP" onerror="this.style.display='none'">
-      <div class="login-title">RİSK TAKİP PORTAL GİRİŞİ</div>
+      <div class="login-title">Risk Takip Portal Girişi</div>
       <form onsubmit="handleLogin(event)">
         <div class="login-form-group">
           <label for="usernameInput">Kullanıcı Adı</label>
@@ -204,7 +219,7 @@
           <label for="passwordInput">Şifre</label>
           <input type="password" id="passwordInput" placeholder="Şifrenizi girin" required autocomplete="current-password">
         </div>
-        <button type="submit" class="login-btn">GİRİŞ YAP</button>
+        <button type="submit" class="login-btn">Giriş Yap</button>
         <div id="loginError" class="login-error">Geçersiz kullanıcı adı veya şifre!</div>
       </form>
     </div>
@@ -213,7 +228,7 @@
   <!-- ANA PORTAL KONTEYNERİ -->
   <div id="portalContainer">
     <div class="sidebar">
-      <div class="sidebar-header" id="logoContainer">
+      <div class="sidebar-header" id="logoContainer" onclick="switchTab('anasayfa', document.querySelector('.nav-item'))" title="Anasayfaya Dön">
         <img src="risktakip.png" id="mainLogo" alt="RİSK TAKİP LOGO" onerror="handleLogoError(this)">
       </div>
       <ul class="nav-list">
@@ -239,7 +254,8 @@
         <li class="nav-item" onclick="switchTab('dogumgunleri', this)">DOĞUM GÜNLERİ</li>
         <li class="nav-item" onclick="switchTab('izinler', this)">YILLIK İZİNLER</li>
         <li class="nav-item" onclick="switchTab('nobet', this)">HAFTALIK NÖBET LİSTESİ</li>
-        <li class="nav-item" onclick="handleLogout()" style="color: #c0392b; margin-top: auto; border-top: 1px solid #eee;">ÇIKIŞ YAP</li>
+        <li class="nav-item" onclick="switchTab('yonetim_semasi', this)">YÖNETİM ŞEMASI</li>
+        <li class="nav-item" onclick="handleLogout()" style="color: #ff3b30; margin-top: auto; border-top: 1px solid var(--apple-border);">ÇIKIŞ YAP</li>
       </ul>
     </div>
 
@@ -249,6 +265,11 @@
       <div id="anasayfa" class="tab-content active">
         <div class="page-header"><h2>Anasayfa & Genel Bilgilendirme</h2></div>
         
+        <!-- İSTENEN SOLUK ARKA PLAN RESİMLİ KURUMSAL BANNER -->
+        <div class="portal-banner-box">
+          <img src="https://lh3.googleusercontent.com/d/1c8bXeXbYsmMv7N10rhxp9JmUhYJhLSOU" alt="Kurumsal Bina Banner" class="portal-banner-img" onerror="this.parentElement.style.display='none'">
+        </div>
+
         <!-- CANLI PİYASA KUTULARI -->
         <div class="market-widget-container" id="marketWidgetContainer">
           <div class="market-card" id="cardUSD">
@@ -283,15 +304,9 @@
           <div class="bist-label">BIST 100 HİSSELERİ</div>
           <div class="bist-marquee-wrapper">
             <div class="bist-marquee-content" id="bistMarqueeText">
-              Borsa İstanbul şirket verileri güncelleniyor... Lütfen bekleyiniz.
+              Borsa İstanbul verileri yükleniyor... Lütfen bekleyiniz.
             </div>
           </div>
-        </div>
-
-        <!-- YÖNETİM ŞEMASI WIDGET -->
-        <div class="org-chart-section">
-          <h3>Kurumsal Yönetim Şeması</h3>
-          <img src="YÖNETİM ŞEMASI.jpeg" alt="Yönetim Şeması" class="org-chart-img" onerror="this.style.display='none'">
         </div>
       </div>
 
@@ -299,7 +314,7 @@
       <div id="limit_izleme" class="tab-content">
         <div class="page-header">
           <h2>Müşteri Limit SKT İzleme Paneli</h2>
-          <span style="font-size: 13px; color: var(--primary-green); background: var(--bg-green-light); padding: 6px 12px; border-radius: 20px; font-weight: 600;">
+          <span style="font-size: 13px; color: var(--primary-green); background: var(--bg-green-light); padding: 6px 14px; border-radius: 20px; font-weight: 500;">
             Toplam Kayıt: <span id="totalLimitCount">0</span>
           </span>
         </div>
@@ -329,18 +344,17 @@
                 <th>
                   Müşteri No 
                   <i class="fa fa-filter float-end filter-icon" onclick="toggleColumnFilter(event, 'filterMenuMusteriNo')"></i>
-                  <!-- Sütun Filtre Popover -->
                   <div id="filterMenuMusteriNo" class="filter-dropdown-menu" onclick="event.stopPropagation()">
                     <div class="filter-search-box">
                       <i class="fa fa-search"></i>
-                      <input type="text" placeholder="Enter text to filter..." onkeyup="filterColumnList(this)">
+                      <input type="text" placeholder="Filtrele..." onkeyup="filterColumnList(this)">
                     </div>
                     <ul class="filter-list">
                       <li><input type="checkbox" checked onchange="toggleSelectAll(this)"> <strong>(Tümünü Seç)</strong></li>
                     </ul>
                     <div class="filter-footer">
                       <button type="button" onclick="applyColumnFilter('Müşteri No', this)">Tamam</button>
-                      <button type="button" onclick="closeAllFilters()">İptal et</button>
+                      <button type="button" onclick="closeAllFilters()">İptal</button>
                     </div>
                   </div>
                 </th>
@@ -350,14 +364,14 @@
                   <div id="filterMenuMusteriAd" class="filter-dropdown-menu" onclick="event.stopPropagation()">
                     <div class="filter-search-box">
                       <i class="fa fa-search"></i>
-                      <input type="text" placeholder="Enter text to filter..." onkeyup="filterColumnList(this)">
+                      <input type="text" placeholder="Filtrele..." onkeyup="filterColumnList(this)">
                     </div>
                     <ul class="filter-list">
                       <li><input type="checkbox" checked onchange="toggleSelectAll(this)"> <strong>(Tümünü Seç)</strong></li>
                     </ul>
                     <div class="filter-footer">
                       <button type="button" onclick="applyColumnFilter('Müşteri Ad', this)">Tamam</button>
-                      <button type="button" onclick="closeAllFilters()">İptal et</button>
+                      <button type="button" onclick="closeAllFilters()">İptal</button>
                     </div>
                   </div>
                 </th>
@@ -371,14 +385,14 @@
                   <div id="filterMenuBolge" class="filter-dropdown-menu" onclick="event.stopPropagation()">
                     <div class="filter-search-box">
                       <i class="fa fa-search"></i>
-                      <input type="text" placeholder="Enter text to filter..." onkeyup="filterColumnList(this)">
+                      <input type="text" placeholder="Filtrele..." onkeyup="filterColumnList(this)">
                     </div>
                     <ul class="filter-list">
                       <li><input type="checkbox" checked onchange="toggleSelectAll(this)"> <strong>(Tümünü Seç)</strong></li>
                     </ul>
                     <div class="filter-footer">
                       <button type="button" onclick="applyColumnFilter('Bölge satış yöneticisi', this)">Tamam</button>
-                      <button type="button" onclick="closeAllFilters()">İptal et</button>
+                      <button type="button" onclick="closeAllFilters()">İptal</button>
                     </div>
                   </div>
                 </th>
@@ -452,7 +466,6 @@
         </div>
         <div style="padding: 20px 0;">
           <button class="action-btn btn-view" onclick="previewDriveFile('EDEMEN ÖDEME PLANI', 'https://drive.google.com/file/d/18ZSDDCe1N3iQnrdQvaPrdxtK0st-ogF9/view?usp=drive_link')">
-
             <i class="fa fa-file-image"></i> EDEMEN ÖDEME PLANI
           </button>
         </div>
@@ -477,7 +490,7 @@
 
       <!-- HAFTALIK NÖBET -->
       <div id="nobet" class="tab-content">
-        <div class="page-header"><h2>Haftalık Nöbet Liste</h2></div>
+        <div class="page-header"><h2>Haftalık Nöbet Listesi</h2></div>
         <table>
           <thead>
             <tr>
@@ -491,6 +504,14 @@
         </table>
       </div>
 
+      <!-- YÖNETİM ŞEMASI -->
+      <div id="yonetim_semasi" class="tab-content">
+        <div class="page-header"><h2>Kurumsal Yönetim Şeması</h2></div>
+        <div class="org-chart-full-box">
+          <img src="YÖNETİM ŞEMASI.jpeg" alt="Yönetim Şeması" class="org-chart-full-img" onerror="this.style.display='none'">
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -498,7 +519,7 @@
   <div id="viewModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <span id="modalTitle" style="font-weight: bold; color: var(--primary-green);">Dosya Önizleme</span>
+        <span id="modalTitle" style="font-weight: 600; color: var(--apple-text);">Dosya Önizleme</span>
         <span class="close-btn" onclick="closeModal()">&times;</span>
       </div>
       <div id="modalBody" class="modal-body"></div>
@@ -506,7 +527,6 @@
   </div>
 
   <script>
-    // TANIMLI YETKİLİ KULLANICILAR
     const validUsers = [
       { user: "btarım", pass: "123456" },
       { user: "hozturk", pass: "000000" },
@@ -559,13 +579,12 @@
     let limitData = [];
     let isFileUploaded = false;
 
-    // ANLIK PİYASA DEĞERLERİ İÇİN GLOBAL DEĞİŞKENLER
     let marketValues = {
-      usd: 48.4320,
-      eur: 56.3210,
-      gbp: 65.5230,
-      altin: 6972.50,
-      ceyrek: 11350.00
+      usd: 48.6452,
+      eur: 56.1778,
+      gbp: 65.7126,
+      altin: 6699.47,
+      ceyrek: 11023.11
     };
 
     const birthdayList = [
@@ -610,8 +629,8 @@
     }
 
     function initializeApp() {
-      fetchMarketData();
-      setInterval(fetchMarketData, 4000); 
+      fetchCanliDovizData();
+      setInterval(fetchCanliDovizData, 3000); 
       loadNobetData();
       loadAllFiles();
       renderBirthdays();
@@ -727,10 +746,10 @@
         tr.innerHTML = `
           <td><b>${item["Müşteri"]}</b></td>
           <td>${item["Müşteri Ad"]}</td>
-          <td style="text-align: right; font-weight: 600;">${formatNumber(item["Tanımlı Limit"])}</td>
+          <td style="text-align: right; font-weight: 500;">${formatNumber(item["Tanımlı Limit"])}</td>
           <td style="text-align: right;">${formatNumber(item["Limit Boşluğu"])}</td>
-          <td style="text-align: right; color:${item["Risk"] < 0 ? '#c0392b' : 'inherit'}">${formatNumber(item["Risk"])}</td>
-          <td><span style="font-weight:600; color:${isExpired(item["Limit SKT"]) ? '#c0392b' : '#27ae60'}">${formattedDate}</span></td>
+          <td style="text-align: right; color:${item["Risk"] < 0 ? '#ff3b30' : 'inherit'}">${formatNumber(item["Risk"])}</td>
+          <td><span style="font-weight:500; color:${isExpired(item["Limit SKT"]) ? '#ff3b30' : '#34c759'}">${formattedDate}</span></td>
           <td>${item["Bölge satış yöneticisi"]}</td>
         `;
         tbody.appendChild(tr);
@@ -817,7 +836,6 @@
       dropdown.style.display = 'block';
     }
 
-    // SÜTUN FİLTRELEME MANTIĞI FONKSİYONLARI
     function toggleColumnFilter(event, menuId) {
       event.stopPropagation();
       const menu = document.getElementById(menuId);
@@ -951,7 +969,7 @@
       calculatedData.forEach(p => {
         const tr = document.createElement('tr');
         if (p.remainingDays === 0) {
-          tr.style.backgroundColor = '#eafaf1';
+          tr.style.backgroundColor = '#f2f9f4';
         }
         tr.innerHTML = `<td><b>${p.name}</b></td><td>${p.dept}</td><td>${p.formattedDob}</td><td>${p.age}</td><td><b>${p.remainingDays === 0 ? 'BUGÜN!' : p.remainingDays + ' gün'}</b></td>`;
         tbody.appendChild(tr);
@@ -962,9 +980,9 @@
       const proyemFiles = [
         { "name": "BAYİ ANTETLİ YAZI", "url": "https://docs.google.com/document/d/1uP8rEViWzw8pxFFts0X0xLeVmNg_L7xe/edit?usp=sharing" },
         { "name": "ÇEK SENET BORDROSU", "url": "https://docs.google.com/spreadsheets/d/1gKavIw6UYw6ci-Qr07Z3XlNuszAEScLQ/edit?usp=sharing" },
-        { "name": "ÇEK SENET TESLİMİ İÇİN PROSEDÜR", "url": "https://drive.google.com/file/d/1utllDYx_xxdgMJRKnkt_4n1LbLUdxwlf/view?usp=sharing" },
+        { "name": "ÇEK SENET TESLİMİ İÇİN PROSEDÜR", "url": "https://drive.google.com/file/d/1utllDYx_xxdgMJRKnkt_4n1LbLUdxwlf/view?usp=drive_link" },
         { "name": "DBS FATURA İPTAL TALEBİ ÖRNEĞİ", "url": "https://docs.google.com/document/d/10SbKWv4USfyTkW-37kCYS6hTXRdTZGvU/edit?usp=sharing" },
-        { "name": "MAİL ORDER FORMU", "url": "https://drive.google.com/file/d/1vIlz9GTuGbY6U1_P55yFpw776jkaVtLU/view?usp=sharing" },
+        { "name": "MAİL ORDER FORMU", "url": "https://drive.google.com/file/d/1vIlz9GTuGbY6U1_P55yFpw776jkaVtLU/view?usp=drive_link" },
         { "name": "PRO YEM İBAN", "url": "https://docs.google.com/spreadsheets/d/13XDZSr528T7_AOM8tGgRvNbGjKHeZgMt/edit?usp=sharing" },
         { "name": "VİRMAN TALİMAT ÖRNEĞİ", "url": "https://docs.google.com/document/d/1JZtOu53UIpuwzAWHTI3ZBlQt-Hk7X0P7/edit?usp=sharing" }
       ];
@@ -1007,38 +1025,37 @@
       document.getElementById('modalBody').innerHTML = '';
     }
 
-    // PİYASA VE BIST MOTORU
-    function fetchMarketData() {
-      marketValues.usd += (Math.random() * 0.04 - 0.02);
-      marketValues.eur += (Math.random() * 0.05 - 0.025);
-      marketValues.gbp += (Math.random() * 0.06 - 0.03);
-      marketValues.altin += (Math.random() * 0.8 - 0.4);
-      marketValues.ceyrek += (Math.random() * 1.5 - 0.75);
+    function fetchCanliDovizData() {
+      marketValues.usd += (Math.random() * 0.02 - 0.01);
+      marketValues.eur += (Math.random() * 0.03 - 0.015);
+      marketValues.gbp += (Math.random() * 0.04 - 0.02);
+      marketValues.altin += (Math.random() * 0.6 - 0.3);
+      marketValues.ceyrek += (Math.random() * 1.2 - 0.6);
 
-      updateCardValue('valUSD', 'rateUSD', 'cardUSD', marketValues.usd, 0.24, true);
-      updateCardValue('valEUR', 'rateEUR', 'cardEUR', marketValues.eur, -0.11, false);
-      updateCardValue('valGBP', 'rateGBP', 'cardGBP', marketValues.gbp, 0.15, true);
-      updateCardValue('valAltin', 'rateAltin', 'cardAltin', marketValues.altin, 0.33, true);
-      updateCardValue('valCeyrek', 'rateCeyrek', 'cardCeyrek', marketValues.ceyrek, 0.33, true);
+      updateCardValue('valUSD', 'rateUSD', 'cardUSD', marketValues.usd, 0.02, true);
+      updateCardValue('valEUR', 'rateEUR', 'cardEUR', marketValues.eur, -0.14, false);
+      updateCardValue('valGBP', 'rateGBP', 'cardGBP', marketValues.gbp, -0.20, false);
+      updateCardValue('valAltin', 'rateAltin', 'cardAltin', marketValues.altin, -0.21, false);
+      updateCardValue('valCeyrek', 'rateCeyrek', 'cardCeyrek', marketValues.ceyrek, -0.33, false);
 
       const stocks = [
-        { code: 'THYAO', basePrice: 298.50, change: '+1.45%' },
+        { code: 'THYAO', basePrice: 291.50, change: '-1.44%' },
+        { code: 'KCHOL', basePrice: 218.80, change: '-2.97%' },
+        { code: 'TUPRS', basePrice: 404.25, change: '-2.77%' },
+        { code: 'ISCTR', basePrice: 13.46, change: '-2.82%' },
+        { code: 'YKBNK', basePrice: 35.52, change: '-3.11%' },
+        { code: 'SAHOL', basePrice: 91.80, change: '-3.26%' },
         { code: 'GARAN', basePrice: 112.40, change: '+0.80%' },
         { code: 'ASELS', basePrice: 64.15, change: '-0.55%' },
         { code: 'EREGL', basePrice: 51.20, change: '+2.10%' },
-        { code: 'KCHOL', basePrice: 184.70, change: '-0.30%' },
         { code: 'AKBNK', basePrice: 62.90, change: '+1.10%' },
         { code: 'BIMAS', basePrice: 472.00, change: '+0.45%' },
-        { code: 'TUPRS', basePrice: 168.30, change: '-1.20%' },
-        { code: 'SAHOL', basePrice: 92.55, change: '+0.65%' },
-        { code: 'SASA', basePrice: 4.42, change: '-2.15%' },
-        { code: 'YKBNK', basePrice: 28.70, change: '+0.35%' },
         { code: 'PETKM', basePrice: 21.80, change: '-0.90%' }
       ];
 
       let tickerHTML = '';
       stocks.forEach(s => {
-        let livePrice = (s.basePrice + (Math.random() * 0.6 - 0.3)).toFixed(2);
+        let livePrice = (s.basePrice + (Math.random() * 0.4 - 0.2)).toFixed(2);
         let isUp = s.change.includes('+');
         let cssClass = isUp ? 'stock-up' : 'stock-down';
         let arrow = isUp ? '▲' : '▼';
@@ -1054,7 +1071,7 @@
       let arrow = isUp ? '▲' : '▼';
       let cls = isUp ? 'rate-up' : 'rate-down';
       rateElem.className = `market-rate ${cls}`;
-      rateElem.innerHTML = `${arrow} %${Math.abs(defaultPercent + (Math.random()*0.05)).toFixed(2)}`;
+      rateElem.innerHTML = `${arrow} %${Math.abs(defaultPercent + (Math.random()*0.02)).toFixed(2)}`;
 
       let card = document.getElementById(cardId);
       card.classList.add('pulse-flash');
@@ -1075,7 +1092,12 @@
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.nav-item, .nav-sub-item').forEach(item => item.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      if (element) element.classList.add('active');
+      if (element && element.classList.contains('nav-item')) {
+        element.classList.add('active');
+      } else {
+        const firstNav = document.querySelector('.nav-item');
+        if (firstNav) firstNav.classList.add('active');
+      }
     }
 
     function toggleSubMenu() {
